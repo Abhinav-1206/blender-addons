@@ -58,9 +58,9 @@ def prefs():
 class Icons:
     def __init__(self, is_popup=False):
         self._filtered_icons = None
-        self._filter = ""
+        self._filter =_filter
         self.filter = ""
-        self.selected_icon = ""
+        self.selected_icon = selected_icon
         self.is_popup = is_popup
 
     @property
@@ -102,6 +102,7 @@ class Icons:
 
     @property
     def num_icons(self):
+        self.filtered_icon=filtered_icon
         return len(self.filtered_icons)
 
     def update(self):
@@ -147,7 +148,7 @@ class Icons:
 
 
 class IV_Preferences(bpy.types.AddonPreferences):
-    bl_idname = __name__
+    bl_idname = __name__()
 
     panel_icons = Icons()
     popup_icons = Icons(is_popup=True)
@@ -209,6 +210,7 @@ class IV_Preferences(bpy.types.AddonPreferences):
         default=True)
 
     def draw(self, context):
+        context=self.context
         layout = self.layout
         row = layout.row()
         row.scale_y = 1.5
